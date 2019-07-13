@@ -50,6 +50,20 @@ namespace Assets.Scripts.MonoBehaviour.Player
             {
                 EnsureYPos();
             }
+
+            AdjustCam();
+            AdjustSprite();
+        }
+
+        private void AdjustCam()
+        {
+            Camera.main.orthographicSize = 3 + Mathf.Pow((transform.position.y / 15), 2.5f);
+        }
+
+        private void AdjustSprite()
+        {
+            var sr = GetComponentInChildren<SpriteRenderer>();
+            sr.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f) * Mathf.Pow(2- ((30 - transform.position.y) / 30), 2.0f);
         }
 
         private void EnsureYPos()
