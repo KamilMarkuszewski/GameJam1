@@ -9,7 +9,7 @@ public class DehydrationController : MonoBehaviour {
     
 	void Start () {
         gameModel.waterLevel = 100;
-        InvokeRepeating("IncreaseDehydration", 1.0f, 0.1f);  //3f);
+        InvokeRepeating("IncreaseDehydration", 1.0f, 3f);  //3f);
     }
 
     void IncreaseDehydration() {

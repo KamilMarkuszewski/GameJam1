@@ -23,7 +23,7 @@ GameObject:
   - component: {fileID: 81394051458132620}
   m_Layer: 0
   m_Name: Main Camera
-  m_TagString: Untagged
+  m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -55,6 +55,7 @@ GameObject:
   - component: {fileID: 114539449942053428}
   - component: {fileID: 114111210707842744}
   - component: {fileID: 95481616986140290}
+  - component: {fileID: 114271274763939770}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -95,7 +96,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1808064139980416}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 4.83, z: -10}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4300560813349348}
@@ -123,10 +124,10 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.3
-  far clip plane: 1000
+  near clip plane: 1
+  far clip plane: 2000
   field of view: 60
-  orthographic: 0
+  orthographic: 1
   orthographic size: 5
   m_Depth: -1
   m_CullingMask:
@@ -136,11 +137,11 @@ Camera:
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
   m_TargetEye: 3
-  m_HDR: 1
-  m_AllowMSAA: 1
-  m_AllowDynamicResolution: 0
+  m_HDR: 0
+  m_AllowMSAA: 0
+  m_AllowDynamicResolution: 1
   m_ForceIntoRT: 0
-  m_OcclusionCulling: 1
+  m_OcclusionCulling: 0
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
 --- !u!81 &81394051458132620
@@ -183,6 +184,18 @@ MonoBehaviour:
     type: 2}
   BulletParent: {fileID: 0}
   PidgeonSprite: {fileID: 4300560813349348}
+--- !u!114 &114271274763939770
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1808064139980416}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c09c628e396866346836dc708fc14a28, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameModel: {fileID: 11400000, guid: 60682a2b1e921744ba9f8d583412d2c3, type: 2}
 --- !u!114 &114539449942053428
 MonoBehaviour:
   m_ObjectHideFlags: 1
