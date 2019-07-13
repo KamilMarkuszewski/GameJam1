@@ -61,8 +61,7 @@ namespace Assets.Scripts.MonoBehaviour
             {
                 Debug.Log("Trafiony");
                 var shitObj = Instantiate(ShitPrefab.gameObject, col.ClosestPoint(transform.position), Quaternion.identity);
-                shitObj.GetComponentInChildren<SpriteRenderer>().sprite =
-                    ShitSprites[UnityEngine.Random.Range(0, ShitSprites.Length)];
+                shitObj.GetComponentInChildren<SpriteRenderer>().sprite = ShitSprites[UnityEngine.Random.Range(0, ShitSprites.Length - 1)];
             }
         }
 

@@ -7110,8 +7110,8 @@ Tilemap:
       m_ColliderType: 1
   - first: {x: 4, y: 0, z: 0}
     second:
-      m_TileIndex: 0
-      m_TileSpriteIndex: 0
+      m_TileIndex: 1
+      m_TileSpriteIndex: 1
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_ObjectToInstantiate: {fileID: 0}
@@ -7119,8 +7119,8 @@ Tilemap:
       m_ColliderType: 1
   - first: {x: 5, y: 0, z: 0}
     second:
-      m_TileIndex: 0
-      m_TileSpriteIndex: 0
+      m_TileIndex: 1
+      m_TileSpriteIndex: 1
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_ObjectToInstantiate: {fileID: 0}
@@ -7443,8 +7443,8 @@ Tilemap:
       m_ColliderType: 1
   - first: {x: 4, y: 1, z: 0}
     second:
-      m_TileIndex: 0
-      m_TileSpriteIndex: 0
+      m_TileIndex: 1
+      m_TileSpriteIndex: 1
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_ObjectToInstantiate: {fileID: 0}
@@ -7452,8 +7452,8 @@ Tilemap:
       m_ColliderType: 1
   - first: {x: 5, y: 1, z: 0}
     second:
-      m_TileIndex: 0
-      m_TileSpriteIndex: 0
+      m_TileIndex: 1
+      m_TileSpriteIndex: 1
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_ObjectToInstantiate: {fileID: 0}
@@ -8874,14 +8874,14 @@ Tilemap:
       m_ColliderType: 1
   m_AnimatedTiles: {}
   m_TileAssetArray:
-  - m_RefCount: 725
+  - m_RefCount: 721
     m_Data: {fileID: 11400000, guid: be29c528672f26a4a8c56e29c2880c15, type: 2}
-  - m_RefCount: 236
+  - m_RefCount: 240
     m_Data: {fileID: 11400000, guid: c72bd94b30e65ec4795ee245bce0ab16, type: 2}
   m_TileSpriteArray:
-  - m_RefCount: 725
+  - m_RefCount: 721
     m_Data: {fileID: 21300000, guid: 5d07ab06d2738324f99302a2e660d927, type: 3}
-  - m_RefCount: 236
+  - m_RefCount: 240
     m_Data: {fileID: 21300000, guid: eff07926427e28d44aef4b87d06168a7, type: 3}
   m_TileMatrixArray:
   - m_RefCount: 961
@@ -8975,7 +8975,7 @@ Prefab:
     - target: {fileID: 20037561465499752, guid: bf67e93f3b26b82468c936aaa37c3d2f,
         type: 2}
       propertyPath: orthographic
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 20037561465499752, guid: bf67e93f3b26b82468c936aaa37c3d2f,
         type: 2}
@@ -9006,6 +9006,10 @@ Prefab:
         type: 2}
       propertyPath: far clip plane
       value: 2000
+      objectReference: {fileID: 0}
+    - target: {fileID: 1305540928879064, guid: bf67e93f3b26b82468c936aaa37c3d2f, type: 2}
+      propertyPath: m_TagString
+      value: MainCamera
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bf67e93f3b26b82468c936aaa37c3d2f, type: 2}
