@@ -2,14 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using UnityEditor;
 using UnityEngine;
 
-namespace Assets.Scripts.Player
+namespace Assets.Scripts.MonoBehaviour.Player
 {
-    public class CharacterController : MonoBehaviour
+    public class PidgeonCharacterController : UnityEngine.MonoBehaviour
     {
-
         public float DefaultSpeed = 0.02f;
         public float Speed;
 
