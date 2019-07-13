@@ -52,7 +52,7 @@ namespace Assets.Scripts.MonoBehaviour
         {
             if (col.transform.tag == "Bottom")
             {
-                Instantiate(ShitPrefab.gameObject, col.ClosestPoint(transform.position), Quaternion.identity);
+                Instantiate(ShitPrefab.gameObject, GetColPoint(col), Quaternion.identity);
                 Rigidbody.isKinematic = true;
                 transform.position = new Vector3(1000, 1000, 100);
                 ShootingController.BulletsObjectPool.PutObject(this);
@@ -60,13 +60,19 @@ namespace Assets.Scripts.MonoBehaviour
             if (col.transform.tag == "Human")
             {
                 Debug.Log("Trafiony");
-                var shitObj = Instantiate(ShitPrefab.gameObject, col.ClosestPoint(transform.position), Quaternion.identity);
+                var shitObj = Instantiate(ShitPrefab.gameObject, GetColPoint(col), Quaternion.identity);
                 shitObj.GetComponentInChildren<SpriteRenderer>().sprite = ShitSprites[UnityEngine.Random.Range(0, ShitSprites.Length - 1)];
             }
         }
 
-
-
-
+        private Vector3 GetColPoint(Collider col)
+        {
+            var colPoint = col.ClosestPoint(transform.position);
+            if (colPoint.y < 0.01f)
+            {
+                colPoint = new Vector3(colPoint.x, 0.01f, colPoint.z);
+            }
+            return colPoint;
+        }
     }
 }
