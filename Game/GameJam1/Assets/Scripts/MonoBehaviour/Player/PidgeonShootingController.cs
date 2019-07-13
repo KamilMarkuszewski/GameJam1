@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Assets.Scripts.Common;
+using Assets.Scripts.GameModel;
 using UnityEngine;
 
 namespace Assets.Scripts.MonoBehaviour.Player
@@ -12,6 +13,8 @@ namespace Assets.Scripts.MonoBehaviour.Player
         public ObjectPool<BulletScript> BulletsObjectPool;
         public Transform BulletPrefab;
         public Transform BulletParent;
+
+        public ModelSo gameModel;
 
         public Transform PidgeonSprite;
 
@@ -40,7 +43,7 @@ namespace Assets.Scripts.MonoBehaviour.Player
         // Use this for initialization
         void Start()
         {
-
+            gameModel.gutContent = 10;
         }
 
         // Update is called once per frame
@@ -54,13 +57,15 @@ namespace Assets.Scripts.MonoBehaviour.Player
 
         private void Shoot()
         {
-            if (Time.time > _lastShootTime + 1.0f)
+            if (Time.time > _lastShootTime + 1.0f && gameModel.gutContent > 0)
             {
                 _lastShootTime = Time.time;
                 var bullet = BulletsObjectPool.GetObject();
                 bullet.Rigidbody.isKinematic = false;
                 bullet.transform.position = PidgeonSprite.transform.position - new Vector3(0, 0.4f, 0);
                 bullet.Rigidbody.AddForce(transform.forward * 95 * CharacterController.Speed * 4);
+
+                gameModel.gutContent -= 1;
             }
         }
     }

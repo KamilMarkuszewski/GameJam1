@@ -8974,65 +8974,15 @@ Prefab:
       propertyPath: BulletParent
       value: 
       objectReference: {fileID: 2006148778}
-    - target: {fileID: 20037561465499752, guid: bf67e93f3b26b82468c936aaa37c3d2f,
+    - target: {fileID: 114111210707842744, guid: bf67e93f3b26b82468c936aaa37c3d2f,
         type: 2}
-      propertyPath: orthographic
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 20037561465499752, guid: bf67e93f3b26b82468c936aaa37c3d2f,
+      propertyPath: gameModel
+      value: 
+      objectReference: {fileID: 11400000, guid: 60682a2b1e921744ba9f8d583412d2c3,
         type: 2}
-      propertyPath: near clip plane
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 20037561465499752, guid: bf67e93f3b26b82468c936aaa37c3d2f,
-        type: 2}
-      propertyPath: m_HDR
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 20037561465499752, guid: bf67e93f3b26b82468c936aaa37c3d2f,
-        type: 2}
-      propertyPath: m_AllowMSAA
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 20037561465499752, guid: bf67e93f3b26b82468c936aaa37c3d2f,
-        type: 2}
-      propertyPath: m_OcclusionCulling
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 20037561465499752, guid: bf67e93f3b26b82468c936aaa37c3d2f,
-        type: 2}
-      propertyPath: m_AllowDynamicResolution
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 20037561465499752, guid: bf67e93f3b26b82468c936aaa37c3d2f,
-        type: 2}
-      propertyPath: far clip plane
-      value: 2000
-      objectReference: {fileID: 0}
-    - target: {fileID: 1305540928879064, guid: bf67e93f3b26b82468c936aaa37c3d2f, type: 2}
-      propertyPath: m_TagString
-      value: MainCamera
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bf67e93f3b26b82468c936aaa37c3d2f, type: 2}
   m_IsPrefabAsset: 0
---- !u!1 &74813063 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1808064139980416, guid: bf67e93f3b26b82468c936aaa37c3d2f,
-    type: 2}
-  m_PrefabInternal: {fileID: 74813062}
---- !u!114 &74813064
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 74813063}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c09c628e396866346836dc708fc14a28, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gameModel: {fileID: 11400000, guid: 60682a2b1e921744ba9f8d583412d2c3, type: 2}
 --- !u!1 &170076733
 GameObject:
   m_ObjectHideFlags: 0
