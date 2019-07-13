@@ -59,7 +59,7 @@ namespace Assets.Scripts.MonoBehaviour.Player
                 _lastShootTime = Time.time;
                 var bullet = BulletsObjectPool.GetObject();
                 bullet.Rigidbody.isKinematic = false;
-                bullet.transform.position = PidgeonSprite.transform.position;
+                bullet.transform.position = PidgeonSprite.transform.position - new Vector3(0, 0.4f, 0);
                 bullet.Rigidbody.AddForce(transform.forward * 95 * CharacterController.Speed * 4);
             }
         }
