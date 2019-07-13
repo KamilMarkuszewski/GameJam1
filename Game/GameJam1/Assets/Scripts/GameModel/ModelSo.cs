@@ -9,7 +9,8 @@ namespace Assets.Scripts.GameModel
     [CreateAssetMenu]
     public class ModelSo : ScriptableObject
     {
-
+        public int gutContent = 10;
+        public int waterLevel = 90; //percent
 
 
     }
