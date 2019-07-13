@@ -9,21 +9,26 @@ namespace Assets.Scripts.MonoBehaviour.Player
 {
     public class PidgeonShootingController : UnityEngine.MonoBehaviour
     {
-        private ObjectPool<Transform> _bulletsObjectPool;
+        public ObjectPool<BulletScript> BulletsObjectPool;
         public Transform BulletPrefab;
         public Transform BulletParent;
 
+        public Transform PidgeonSprite;
 
-        private Transform ObjectGenerator()
+        private float _lastShootTime;
+
+
+        private BulletScript ObjectGenerator()
         {
             var bullet = Instantiate(BulletPrefab.gameObject, BulletParent);
-
-            return bullet.transform;
+            var scr = bullet.GetComponent<BulletScript>();
+            scr.Rigidbody.isKinematic = true;
+            return scr;
         }
 
         void Awake()
         {
-            _bulletsObjectPool = new ObjectPool<Transform>(ObjectGenerator);
+            BulletsObjectPool = new ObjectPool<BulletScript>(ObjectGenerator);
         }
 
         // Use this for initialization
@@ -37,8 +42,19 @@ namespace Assets.Scripts.MonoBehaviour.Player
         {
             if (Input.GetButton("Shoot"))
             {
-                var bullet = _bulletsObjectPool.GetObject();
-                bullet.transform.position = gameObject.transform.position;
+                Shoot();
+            }
+        }
+
+        private void Shoot()
+        {
+            if (Time.time > _lastShootTime + 1.0f)
+            {
+                _lastShootTime = Time.time;
+                var bullet = BulletsObjectPool.GetObject();
+                bullet.Rigidbody.isKinematic = false;
+                bullet.transform.position = PidgeonSprite.transform.position;
+                bullet.Rigidbody.AddForce(transform.forward *10 );
             }
         }
     }
