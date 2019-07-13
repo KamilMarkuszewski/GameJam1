@@ -5,9 +5,9 @@ using System.Text;
 using Assets.Scripts.MonoBehaviour.Player;
 using UnityEngine;
 
-namespace Assets
+namespace Assets.Scripts.MonoBehaviour
 {
-    public class BulletScript : MonoBehaviour
+    public class BulletScript : UnityEngine.MonoBehaviour
     {
         private Rigidbody _rigidbody;
         public Rigidbody Rigidbody
