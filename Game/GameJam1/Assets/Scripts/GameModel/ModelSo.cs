@@ -10,7 +10,7 @@ namespace Assets.Scripts.GameModel
     public class ModelSo : ScriptableObject
     {
         public int gutContent = 10;
-        public int waterLevel = 90; //percent
+        public int waterLevel = 100; //percent
 
 
     }
