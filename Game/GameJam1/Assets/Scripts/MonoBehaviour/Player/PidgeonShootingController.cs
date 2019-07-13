@@ -17,6 +17,12 @@ namespace Assets.Scripts.MonoBehaviour.Player
 
         private float _lastShootTime;
 
+        private PidgeonCharacterController _characterController;
+        public PidgeonCharacterController CharacterController
+        {
+            get { return _characterController ?? (_characterController = FindObjectOfType<PidgeonCharacterController>()); }
+        }
+
 
         private BulletScript ObjectGenerator()
         {
@@ -54,7 +60,7 @@ namespace Assets.Scripts.MonoBehaviour.Player
                 var bullet = BulletsObjectPool.GetObject();
                 bullet.Rigidbody.isKinematic = false;
                 bullet.transform.position = PidgeonSprite.transform.position;
-                bullet.Rigidbody.AddForce(transform.forward *10 );
+                bullet.Rigidbody.AddForce(transform.forward * 95 * CharacterController.Speed * 4);
             }
         }
     }
