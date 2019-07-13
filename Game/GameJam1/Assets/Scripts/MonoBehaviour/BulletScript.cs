@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Assets.Scripts.Common;
 using Assets.Scripts.MonoBehaviour.Player;
 using UnityEngine;
 
@@ -21,9 +22,9 @@ namespace Assets.Scripts.MonoBehaviour
             get { return _shootingController ?? (_shootingController = FindObjectOfType<PidgeonShootingController>()); }
         }
 
+        public Sprite[] ShitSprites;
 
-
-
+        public Transform ShitPrefab;
 
         // Use this for initialization
         void Start()
@@ -39,15 +40,33 @@ namespace Assets.Scripts.MonoBehaviour
 
         void OnCollisionEnter(Collision col)
         {
+            ExecCollision(col.collider);
+        }
+
+        void OnTriggerEnter(Collider col)
+        {
+            ExecCollision(col);
+        }
+
+        private void ExecCollision(Collider col)
+        {
             if (col.transform.tag == "Bottom")
             {
+                Instantiate(ShitPrefab.gameObject, col.ClosestPoint(transform.position), Quaternion.identity);
                 Rigidbody.isKinematic = true;
                 transform.position = new Vector3(1000, 1000, 100);
                 ShootingController.BulletsObjectPool.PutObject(this);
             }
-
-
+            if (col.transform.tag == "Human")
+            {
+                Debug.Log("Trafiony");
+                var shitObj = Instantiate(ShitPrefab.gameObject, col.ClosestPoint(transform.position), Quaternion.identity);
+                shitObj.GetComponentInChildren<SpriteRenderer>().sprite =
+                    ShitSprites[UnityEngine.Random.Range(0, ShitSprites.Length)];
+            }
         }
+
+
 
 
     }
