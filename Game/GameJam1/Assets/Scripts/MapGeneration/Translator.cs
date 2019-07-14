@@ -30,7 +30,7 @@ public class Translator : MonoBehaviour {
                     }
                     if (Line[i] == "1")
                     {
-                        //Map.SetTile( new Vector3Int(collumn,i,0)+NegativePosition, Tiles[0]);
+                        Map.SetTile( new Vector3Int(collumn,i,0)+NegativePosition, Tiles[4]);
                     }
                     if (Line[i] == "2")
                     {

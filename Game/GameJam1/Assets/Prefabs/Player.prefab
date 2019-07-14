@@ -183,6 +183,7 @@ MonoBehaviour:
   BulletPrefab: {fileID: 4349703871598524, guid: 07f82b1389f6fb84481280ddaff26f74,
     type: 2}
   BulletParent: {fileID: 0}
+  gameModel: {fileID: 11400000, guid: 60682a2b1e921744ba9f8d583412d2c3, type: 2}
   PidgeonSprite: {fileID: 4300560813349348}
 --- !u!114 &114271274763939770
 MonoBehaviour:
