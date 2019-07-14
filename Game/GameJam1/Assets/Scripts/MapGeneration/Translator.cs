@@ -3,43 +3,93 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using System.Linq;
+
+
+public class TileSearcher
+{
+    private readonly string[] water_tile = new string[3] { "water_tile_0", "water_tile_1", "water_tile_2" };
+    private readonly string grass = "grass";
+    private readonly string road_horizontal = "road_up";
+    private readonly string road_vertical = "road_side";
+    private readonly string road_intersection = "road_intersection";
+
+
+    private Tile[] Tiles;
+
+    public TileSearcher(Tile[] TilesArr)
+    {
+        this.Tiles = TilesArr;
+    }
+
+    private Tile getTileByName(string name)
+    {
+        return Tiles.First(f => f.name == name);
+    }
+
+    public Tile getRandomWaterTile()
+    {
+        return getTileByName(water_tile[Random.Range(0, 2)]);
+    }
+
+    public Tile getGrassTile()
+    {
+        return getTileByName(grass);
+    }
+
+    public Tile getRoadHorizontalTile()
+    {
+        return getTileByName(road_horizontal);
+    }
+
+    public Tile getRoadVerticalTile()
+    {
+        return getTileByName(road_vertical);
+    }
+
+    public Tile getRoadIntersectionTile()
+    {
+        return getTileByName(road_intersection);
+    }
+
+}
 
 public class Translator : MonoBehaviour {
 
     public Tile[] Tiles;
+
     void Awake()
     {
         Vector3Int NegativePosition = new Vector3Int(-256,-256, 0 );
         var Gen = new Generator();
-        Gen.CreateMap();
-        Tilemap Map = FindObjectOfType<Tilemap>();
-        string[] Line = new string[512];
-        using (StreamReader file = new StreamReader("Map.txt"))
+        Map map = Gen.CreateMap();
+        Tilemap tilemap = FindObjectOfType<Tilemap>();
+        TileSearcher searcher = new TileSearcher(Tiles);
+        
+        for (int row = 0; row< map.RowsNumber(); row++)
         {
-            string ln;
-            int collumn = 0;
-
-            while ((ln = file.ReadLine()) != null)
+            for (int column = 0; column < map.ColumnsNumber(); column++)
             {
-                Line = ln.Split(',');
-                for(int i = 0; i < 511; i++)
+                switch (map.Element(row, column))
                 {
-                    if (Line[i] == "0")
-                    {
-                        Map.SetTile(new Vector3Int(collumn, i, 0)+ NegativePosition, Tiles[1+ Random.Range(0,3)]);
-                    }
-                    if (Line[i] == "1")
-                    {
-                        Map.SetTile( new Vector3Int(collumn,i,0)+NegativePosition, Tiles[4]);
-                    }
-                    if (Line[i] == "2")
-                    {
-                        Map.SetTile(new Vector3Int(collumn, i, 0)+ NegativePosition, Tiles[0]);
-                    }
-                }
-                collumn++;
+                    case MapElement.WATER:
+                        tilemap.SetTile(new Vector3Int(row, column, 0) + NegativePosition, searcher.getRandomWaterTile());
+                        break;
+                    case MapElement.ROAD_HORIZONTAL:
+                        tilemap.SetTile(new Vector3Int(row, column, 0) + NegativePosition, searcher.getRoadHorizontalTile());
+                        break;
+                    case MapElement.ROAD_VERTICAL:
+                        tilemap.SetTile(new Vector3Int(row, column, 0) + NegativePosition, searcher.getRoadVerticalTile());
+                        break;
+                    case MapElement.ROAD_INTERSECTION:
+                        tilemap.SetTile(new Vector3Int(row, column, 0) + NegativePosition, searcher.getRoadIntersectionTile());
+                        break;
+                    case MapElement.GRASS:
+                        tilemap.SetTile(new Vector3Int(row, column, 0) + NegativePosition, searcher.getGrassTile());
+                        break;
+                }                
             }
-            file.Close();
         }
+        
     }
 }

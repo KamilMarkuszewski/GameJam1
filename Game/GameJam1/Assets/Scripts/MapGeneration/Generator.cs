@@ -3,95 +3,137 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class Generator
 {
-    public void CreateMap()
+    public Map CreateMap()
     {
-        int[,] Map = new int[512, 512];
-        int[,] roads = new int[50, 3];
-        for (int i = 0; i < 50; i++)
-        {
-            roads[i, 0] = UnityEngine.Random.Range(10, 500);
-            roads[i, 1] = roads[i, 0] + UnityEngine.Random.Range(2, 5);
-            roads[i, 2] = UnityEngine.Random.Range(0, 2);
-            for (int j = 0; j < i; j++)
-            {
-                if (roads[i, 2] == roads[j, 2] &&
-                    ((roads[i, 0] - roads[j, 0]) * (roads[i, 0] - roads[j, 0]) < 25 ||
-                     (roads[i, 0] - roads[j, 1]) * (roads[i, 0] - roads[j, 1]) < 25 ||
-                     (roads[i, 1] - roads[j, 0]) * (roads[i, 1] - roads[j, 0]) < 25 ||
-                     (roads[i, 1] - roads[j, 1]) * (roads[i, 1] - roads[j, 1]) < 25))
-                {
-                    i--;
-                    j = i;
-                }
-            }
-        }
-        for (int i = 0; i < 50; i++)
-        {
-            for (int j = 0; j < 512; j++)
-            {
-                for (int k = roads[i, 0]; k < roads[i, 1]; k++)
-                {
-                    if (roads[i, 2] == 0)
-                    {
-                        Map[j, k] = 1;
-                    }
-                    else
-                    {
-                        Map[k, j] = 1;
-                    }
-                }
-                if (roads[i, 2] == 0)
-                {
-                    if (Map[j, roads[i, 0] - 1] != 1)
-                    {
-                        Map[j, roads[i, 0] - 1] = 2;
-                    }
-                    if (Map[j, roads[i, 1]] != 1)
-                    {
-                        Map[j, roads[i, 1]] = 2;
-                    }
-                }
-                else
-                {
-                    if (Map[roads[i, 0] - 1,j] != 1)
-                    {
-                        Map[roads[i, 0] - 1, j] = 2;
-                    }
-                    if (Map[roads[i, 1] , j] != 1)
-                    {
-                        Map[roads[i, 1] , j] = 2;
-                    }
-                }
-            }
-        }
-        for(int i = 0; i < 10; i++)
-        {
-            for(int j = 0; j < 512; j++)
-            {
-                Map[i, j] = 0;
-                Map[511 -i, j] = 0;
-                Map[j, i] = 0;
-                Map[j, 511 - i] = 0;
-            }
-        }
+        Map map = new Map();
+        map.GenerateWaterMap(512, 512);
 
-        System.IO.StreamWriter streamWriter = new System.IO.StreamWriter("Map.txt");
-        string output = "";
-        for (int i = 0; i < Map.GetUpperBound(0); i++)
+        GenerateHorizontalRoads(map);
+        GenerateVerticalRoads(map);
+
+
+
+        //int[,] roads = new int[50, 3];
+        //for (int i = 0; i < 50; i++)
+        //{
+        //    roads[i, 0] = UnityEngine.Random.Range(10, 500); //umieszenie?
+        //    roads[i, 1] = roads[i, 0] + UnityEngine.Random.Range(2, 5); //szerokość?
+        //    roads[i, 2] = UnityEngine.Random.Range(0, 2); 
+        //    for (int j = 0; j < i; j++)
+        //    {
+        //        if (roads[i, 2] == roads[j, 2] &&
+        //            ((roads[i, 0] - roads[j, 0]) * (roads[i, 0] - roads[j, 0]) < 25 ||
+        //             (roads[i, 0] - roads[j, 1]) * (roads[i, 0] - roads[j, 1]) < 25 ||
+        //             (roads[i, 1] - roads[j, 0]) * (roads[i, 1] - roads[j, 0]) < 25 ||
+        //             (roads[i, 1] - roads[j, 1]) * (roads[i, 1] - roads[j, 1]) < 25))
+        //        {
+        //            i--;
+        //            j = i;
+        //        }
+        //    }
+        //}
+        //for (int i = 0; i < 50; i++)
+        //{
+        //    for (int j = 0; j < 512; j++)
+        //    {
+        //        for (int k = roads[i, 0]; k < roads[i, 1]; k++)
+        //        {
+        //            if (roads[i, 2] == 0)
+        //            {
+        //                map.Put(j, k, MapElement.ROAD);
+        //            }
+        //            else
+        //            {
+        //                map.Put(k, j, MapElement.ROAD);
+        //            }
+        //        }
+        //        if (roads[i, 2] == 0)
+        //        {
+        //            if (map.isRoad(j, roads[i, 0] - 1))
+        //            {
+        //                map.Put(j, roads[i, 0] - 1, MapElement.GRASS);
+        //            }
+        //            if (map.isRoad(j, roads[i, 1]))
+        //            {
+        //                map.Put(j, roads[i, 1], MapElement.GRASS);
+        //            }
+        //        }
+        //        else
+        //        {
+        //            if (map.isRoad(roads[i, 0] - 1, j))
+        //            {
+        //                map.Put(roads[i, 0] - 1, j, MapElement.GRASS);
+        //            }
+        //            if (map.isRoad(roads[i, 1], j))
+        //            {
+        //                map.Put(roads[i, 1], j, MapElement.GRASS);
+        //            }
+        //        }
+        //    }
+        //}
+
+        map.Save();
+        return map;
+    }
+
+    private void GenerateHorizontalRoads(Map map)
+    {
+        for (int row = 0; row < map.RowsNumber(); row ++)
         {
-            for (int j = 0; j < Map.GetUpperBound(1); j++)
+            int numberOfNotRoadElements = UnityEngine.Random.Range(8, 25);
+            row += numberOfNotRoadElements;
+            if (row > map.RowsNumber())
             {
-                output += Map[i, j].ToString();
-                if (j < Map.GetUpperBound(1) - 1)
-                {
-                    output += ",";
-                }
+                break;
             }
-            streamWriter.WriteLine(output);
-            output = "";
+
+            int numberOfRoadElements = UnityEngine.Random.Range(4, 6);
+            if (row + numberOfRoadElements > map.RowsNumber())
+            {
+                break;
+            }
+
+            map.changeElementsInRow(row + 1, MapElement.WATER, MapElement.GRASS);
+            for (int i = 2; i < numberOfRoadElements; i++)
+            {
+                map.changeElementsInRow(row + i, MapElement.WATER, MapElement.ROAD_HORIZONTAL);
+            }
+            map.changeElementsInRow(row + numberOfRoadElements, MapElement.WATER, MapElement.GRASS);
+
+            row += numberOfRoadElements;
         }
-        streamWriter.Close();
+    }
+
+    private void GenerateVerticalRoads(Map map)
+    {
+        for (int column = 0; column < map.ColumnsNumber(); column++)
+        {
+            int numberOfNotRoadElements = UnityEngine.Random.Range(8, 25);
+            column += numberOfNotRoadElements;
+            if (column > map.ColumnsNumber())
+            {
+                break;
+            }
+
+            int numberOfRoadElements = UnityEngine.Random.Range(4, 6);
+            if (column + numberOfRoadElements > map.ColumnsNumber())
+            {
+                break;
+            }
+
+            map.changeElementInColumn(column + 1, MapElement.WATER, MapElement.GRASS);
+            for (int i = 2; i < numberOfRoadElements; i++)
+            {
+                map.changeElementInColumn(column + i, MapElement.WATER, MapElement.ROAD_VERTICAL);
+                map.changeElementInColumn(column + i, MapElement.GRASS, MapElement.ROAD_VERTICAL);
+                map.changeElementInColumn(column + i, MapElement.ROAD_HORIZONTAL, MapElement.ROAD_INTERSECTION);
+            }
+            map.changeElementInColumn(column + numberOfRoadElements, MapElement.WATER, MapElement.GRASS);
+
+            column += numberOfRoadElements;
+        }
     }
 }

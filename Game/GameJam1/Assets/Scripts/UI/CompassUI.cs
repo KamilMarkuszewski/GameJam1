@@ -15,8 +15,6 @@ public class CompassUI : MonoBehaviour {
         Vector3 direction = player.transform.localEulerAngles;
         float yValue = direction.y;
 
-        print(yValue);
-
         Vector3 rotation = CompassContainer.transform.localEulerAngles;
         CompassContainer.transform.localEulerAngles = new Vector3(rotation.x, rotation.y, yValue);
     }
